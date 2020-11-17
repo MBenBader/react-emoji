@@ -1,5 +1,6 @@
-.App {
-  text-align: center;
+.MuiPagination-ul {
+  width: fit-content !important;
+  margin : 5vh auto !important;
 }
 
 .App-logo {

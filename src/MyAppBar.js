@@ -10,8 +10,8 @@ import { useDispatch } from 'react-redux';
 function MyAppBar() {
     const dispatch = useDispatch()
 
-    const searchEmoji =(event) => {
-        dispatch({ type: 'SET_FILTRE', payload : event.target.value })
+    const searchEmoji = (event) => {
+        dispatch({ type: 'SET_FILTRE', payload: event.target.value })
     }
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -75,10 +75,10 @@ function MyAppBar() {
             <AppBar position="static">
                 <Toolbar>
                     <Typography className={classes.title} variant="h6" noWrap>
-                        Material-UI
+                        Emojis Finder
                         </Typography>
-                    <div >
-                        <div >
+                    <div className={classes.search} >
+                        <div className={classes.searchIcon}>
                             <SearchIcon />
                         </div>
                         <InputBase

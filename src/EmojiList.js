@@ -8,6 +8,7 @@ import Pagination from '@material-ui/lab/Pagination';
 function EmojiList(props) {
     const emojis = useSelector(state => state.emojiReducer.emojis)
     const filtre = useSelector(state => state.emojiReducer.filtre)
+    const filtreByKW = useSelector(state => state.emojiReducer.filtreByKW)
     const [emojisToDisplay, setEmojisToDisplay] = React.useState([]);
     const [page, setPage] = React.useState(1);
     const [count, setCount] = React.useState(1);
@@ -24,6 +25,25 @@ function EmojiList(props) {
         setEmojisToDisplay(test);
         setCount(parseInt((test.length / 25).toFixed(0)))
     }, [filtre, emojis]);
+
+    useEffect(() => {
+        let emojisKW = [];
+        let emojisFiltred = [];
+        emojisKW = emojis.filter(element => {
+            filtreByKW.forEach(elem => {
+                let keywordsTab = element.keywords.split(" ");
+                keywordsTab.forEach(key =>{
+                    if (key.toLowerCase() === elem.toLowerCase()) {
+                        emojisFiltred.push(element);
+                    }
+                })
+            });
+            return emojisFiltred.length ? true : false;
+        })
+        console.log(emojisFiltred, "emojisFiltred")
+        setEmojisToDisplay(emojisFiltred);
+        setCount(parseInt((emojisFiltred.length / 25).toFixed(0)))
+    }, [filtreByKW, emojis]);
 
     useEffect(() => {
         setCount(parseInt((emojis.length / 25).toFixed(0)))

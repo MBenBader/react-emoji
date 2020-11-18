@@ -1,6 +1,7 @@
 const initial_states = {
     emojis :[],
-    filtre: ""
+    filtre: "",
+    filtreByKW: []
 }
 const emojiReducer = (state = initial_states, action) => {
     switch (action.type) {
@@ -13,6 +14,11 @@ const emojiReducer = (state = initial_states, action) => {
             return {
                 ...state,
                 filtre: action.payload
+            }
+        case "SET_FILTRE_BY_KW" :
+            return {
+                ...state,
+                filtreByKW: action.payload
             }
         default : return state
     }

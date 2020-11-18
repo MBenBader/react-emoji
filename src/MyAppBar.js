@@ -13,6 +13,15 @@ function MyAppBar() {
     const searchEmoji = (event) => {
         dispatch({ type: 'SET_FILTRE', payload: event.target.value })
     }
+    
+    const searchEmojiByKW = (event) => {
+        if(event.target.value.includes(".")){
+            
+            var newArray = event.target.value.replace(".", "").replace(" ", "").split(",").filter(value => value.length !== 0);
+
+            dispatch({ type: 'SET_FILTRE_BY_KW', payload:  newArray})
+        }
+    }
     const useStyles = makeStyles((theme) => ({
         root: {
             flexGrow: 1,
@@ -84,6 +93,20 @@ function MyAppBar() {
                         <InputBase
                             onChange={searchEmoji}
                             placeholder="Search…"
+                            classes={{
+                                root: classes.inputRoot,
+                                input: classes.inputInput,
+                            }}
+                            inputProps={{ 'aria-label': 'search' }}
+                        />
+                    </div>
+                    <div className={classes.search} >
+                        <div className={classes.searchIcon}>
+                            <SearchIcon />
+                        </div>
+                        <InputBase
+                            onChange={searchEmojiByKW}
+                            placeholder="Search By Keyword…"
                             classes={{
                                 root: classes.inputRoot,
                                 input: classes.inputInput,
